@@ -6,13 +6,15 @@ class Game
 
   def play
     (1..12).each do |turn|
+      puts "\nAttempt ##{turn}\n"
       guess = @player.guess
       feedback = @dealer.feedback(guess)
       if feedback[:absolute] == 4
-        puts "The Player Wins!! #{guess} is the correct code"
-        return
+        puts "The Player Wins!! #{guess.join(' ').capitalize} is the correct code"
+        return true
       end
+      @player.recieve_feedback(feedback)
     end
-    puts "The Dealer Wins!! #{@dealer.code.capitalize} is the correct code."
+    puts "\nThe Dealer Wins!! #{@dealer.code.join(' ').capitalize} is the correct code."
   end
 end
